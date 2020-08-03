@@ -1,0 +1,29 @@
+{
+	"name": "vmw-sdk",
+	"version": "1.0.0",
+	"description": "Node.js SDK/API interface for my.vmware.com",
+	"license": "MIT",
+	"repository": "apnex/vmw-sdk",
+	"author": {
+		"name": "Andrew Obersnel"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"files": [
+		"*"
+	],
+	"keywords": [
+		"myvmw",
+		"vmware",
+		"vmw-sdk",
+		"vmw",
+		"nodejs",
+		""
+	],
+	"dependencies": {
+		"chalk": "*",
+		"got": "*",
+		"tough-cookie": "*"
+	}
+}
