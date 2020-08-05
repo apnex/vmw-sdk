@@ -7,7 +7,7 @@ const params = require('./params.json');
 var username = params.username;
 var password = params.password;
 
-(async(id) => {
+(async() => {
 	let client = new vmwClient(); // return 'configured' client
 	try {
 		// login
