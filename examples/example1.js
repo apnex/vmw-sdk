@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-const vmwClient = require('../lib/vmw.sdk');
+const vmwClient = require("@apnex/vmw-sdk");
 const fs = require('fs');
 
 const params = require('./params.json');
