@@ -14,10 +14,12 @@ const password = params.password;
 			password: password
 		});
 
-		// get and display accountInfo
-		let response = await vmw.accountInfo();
-		console.log(JSON.stringify(response, null, "\t"));
-	} catch(error) {
+		// get product index
+		let products = await vmw.getProducts();
+		//=> '[ { name: "VMware vSphere", actions: [ ... ] } ]'
+
+		console.log(JSON.stringify(products, null, "\t"));
+	} catch (error) {
 		console.log(error.message);
 	}
 })();

@@ -14,8 +14,14 @@ const password = params.password;
 			password: password
 		});
 
-		// get and display accountInfo
-		let response = await vmw.accountInfo();
+		// get and display latest [ vmware_nsx_t_data_center ] information
+		let response = await vmw.getProductHeader({
+			category: 'networking_security',
+			product: 'vmware_nsx_t_data_center',
+			version: '3_x'
+		});
+
+		// print to console
 		console.log(JSON.stringify(response, null, "\t"));
 	} catch(error) {
 		console.log(error.message);
