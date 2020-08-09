@@ -20,6 +20,8 @@ If you're looking for a CLI tool leveraging this SDK, see [`vmw-cli`](https://gi
 
 ---
 ### Install
+**NOTE:** Please ensure you have `git` installed for your system or the `npm install` command will fail.  
+
 ```
 $ npm install apnex/vmw-sdk
 ```
