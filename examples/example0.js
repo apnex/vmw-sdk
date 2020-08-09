@@ -2,6 +2,11 @@
 const vmwClient = require('../lib/vmw-sdk');
 const vmw = new vmwClient();
 
+// params.json
+/*=> {
+	"username": "my.username",
+	"password": "my.password"
+}*/
 const params = require('./params.json');
 const username = params.username;
 const password = params.password;
