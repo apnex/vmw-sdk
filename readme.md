@@ -70,7 +70,7 @@ Type: `object`
 }
 ```
 
-example0.js: Create an authenticated `vmw` client
+[`example0.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example0.js): Create an authenticated `vmw` client
 ```js
 // load and create new client instance
 const vmwClient = require('@apnex/vmw-sdk');
@@ -109,9 +109,8 @@ const vmw = new vmwClient();
 			password: "my.password"
 		});
 
-		// get and display accountInfo
+		// get accountInfo
 		let response = await vmw.accountInfo();
-		console.log(JSON.stringify(response, null, "\t"));
 		/*=> {
 			userType: 'Established',
 			accntList: [
@@ -123,6 +122,9 @@ const vmw = new vmwClient();
 				...
 			]
 		}*/
+
+		// print to console
+		console.log(JSON.stringify(response, null, "\t"));
 	} catch (error) {
 		console.log(error.message);
 	}
@@ -133,7 +135,7 @@ const vmw = new vmwClient();
 ##### .getProducts
 Retrieves main product/solution list
 
-[`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example2.js): Get product list and build a download index
+[`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example2.js): Get product list and build a product index
 ```js
 // load and create new client instance
 const vmwClient = require('@apnex/vmw-sdk');
@@ -151,26 +153,22 @@ const vmw = new vmwClient();
 		// get products
 		let response = await vmw.getProducts();
 
-		// construct a normalised download index from links
-		let result = [];
-		const links = response.productCategoryList[0].productList;
-		links.forEach((item) => {
+		// construct a normalised product index from links
+		let links = response.productCategoryList[0].productList;
+		let result = links.map((item) => {
 			let target = item.actions.filter((link) => {
 				return (link.linkname == 'View Download Components');
 			})[0].target;
 			let values = target.split('/');
-			result.push({
+			return {
 				name: item.name,
 				target: target,
 				category: values[3],
 				product: values[4],
 				version: values[5],
-				dlgType: 'PRODUCT_BINARY'
-			});
+				dlgType: 'PRODUCT_BINARY' // default type
+			};
 		});
-
-		// print to console
-		console.log(JSON.stringify(result, null, "\t"));
 		/*=> [
 			{
 				"name": "VMware vSphere",
@@ -182,6 +180,9 @@ const vmw = new vmwClient();
 			},
 			...
 		]*/
+
+		// print to console
+		console.log(JSON.stringify(result, null, "\t"));
 	} catch (error) {
 		console.log(error.message);
 	}
@@ -383,7 +384,7 @@ Type: `object`
 **Note:** You can retrieve available `<downloadGroup>` and `<productId>` values by first calling `.getRelatedDLGList()`  
 See [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example4.js) above.
 
-[`example6.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example6.js): Get available file downloads
+[`example6.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example6.js): Get available file downloads for given group
 ```js
 // load and create new client instance
 const vmwClient = require('@apnex/vmw-sdk');
@@ -429,7 +430,7 @@ const vmw = new vmwClient();
 
 ---
 ##### .getDownload
-Retrieve authenticated doanload URL for a specific file
+Retrieve authenticated download URL for a specific selected file
 
 Type: `object`
 ```js
@@ -442,7 +443,7 @@ Type: `object`
 **Note:** You can retrieve available `<downloadGroup>` and `<productId>` values by first calling `.getRelatedDLGList()`  
 See [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example4.js) above.
 
-[`example7.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example7.js): Get available file downloads
+[`example7.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example7.js): Get authenticated download URL for specific file
 ```js
 // load and create new client instance
 const vmwClient = require('@apnex/vmw-sdk');
@@ -457,34 +458,53 @@ const vmw = new vmwClient();
 			password: "my.password"
 		});
 
-		// get available files for group [ NSX-T-30110 ]
-		let response = await vmw.getDLGDetails({
+		// select download group
+		let body = {
 			downloadGroup: 'NSX-T-30110',
 			productId: 982
-		});
-		/*=> {
-			"eligibilityResponse": {
-				"eligibleToDownload": true
-			},
-			"downloadFiles": [
-				{
-					"fileName": "nsx-unified-appliance-3.0.1.1.0.16556500.ova",
-					"build": "16556497",
-					"releaseDate": "2020-07-16",
-					"fileType": "ova"
-					...
-				},
-				...
-			]
-		}*/
+		};
 
-		// print to console
-		console.log(JSON.stringify(response, null, "\t"));
-	} catch (error) {
+		// get header information
+		let header = await vmw.getDLGHeader(body);
+
+		// get available files for group [ NSX-T-30110 ]
+		let details = await vmw.getDLGDetails(body);
+
+		// find first file result for [ nsx-unified-appliance* ]
+		let fileInfo = details.downloadFiles.filter((file) => {
+			return (new RegExp('nsx-unified-appliance', 'g').exec(file.fileName));
+		})[0];
+
+		// check if permitted to download
+		if(details.eligibilityResponse.eligibleToDownload) {
+			// create and fire off download request
+			let result = await vmw.getDownload({
+				"locale": "en_US",
+				"downloadGroup": header.dlg.code,
+				"productId": header.product.id,
+				"md5checksum": fileInfo.md5checksum,
+				"tagId": header.dlg.tagId,
+				"uUId": fileInfo.uuid,
+				"dlgType": header.dlg.type.replace(/&amp;/g, '&'), // convert &amp to &
+				"productFamily": header.product.name,
+				"releaseDate": fileInfo.releaseDate,
+				"dlgVersion": fileInfo.version,
+				"isBetaFlow": false
+			});
+			/*=> {
+				"downloadURL": "https://download2.vmware.com/software/NST-T30110/nsx-unified-appliance-3.0.1.1.0.16556500.ova?...
+				"fileName": "nsx-unified-appliance-3.0.1.1.0.16556500.ova"
+			}*/
+
+			// print to console
+			console.log(JSON.stringify(result, null, "\t"));
+		} else {
+			throw new Error('Not permitted to download this file, check account entitlement');
+		}
+	} catch(error) {
 		console.log(error.message);
 	}
 })();
 ```
 
-async getDownload(json) {
-//async getMyLicensedProducts() {
+**Note:** Make a HTTP GET to the `downloadURL` value returned from **.getDownload()** to download the file

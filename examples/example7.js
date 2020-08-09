@@ -14,45 +14,43 @@ const password = params.password;
 			password: password
 		});
 
-		// get header information
-		let header = await vmw.getDLGHeader({
+		// select download group
+		let body = {
 			downloadGroup: 'NSX-T-30110',
 			productId: 982
-		});
-		console.log(JSON.stringify(header, null, "\t"));
+		};
+
+		// get header information
+		let header = await vmw.getDLGHeader(body);
 
 		// get and display latest [ vmware_nsx_t_data_center ] information
-		let details = await vmw.getDLGDetails({
-			downloadGroup: 'NSX-T-30110',
-			productId: 982
-		});
-		console.log(JSON.stringify(details, null, "\t"));
+		let details = await vmw.getDLGDetails(body);
 
-		// filter result for [ nsx-unified-appliance* ]
+		// filter first file result for [ nsx-unified-appliance* ]
 		let fileInfo = details.downloadFiles.filter((file) => {
 			return (new RegExp('nsx-unified-appliance', 'g').exec(file.fileName));
 		})[0];
 
-		// create download request
-		let json = {
-			"locale": "en_US",
-			"downloadGroup": details.downloadGroup,
-			"productId": details.productId,
-			"md5checksum": details.md5checksum,
-			"tagId": details.tagId,
-			"uUId": details.uuid,
-			"dlgType": details.dlgType,
-			"productFamily": details.productFamily,
-			"releaseDate": details.releaseDate,
-			"dlgVersion": details.version,
-			"isBetaFlow": false
-		};
-		/*
-		let result = await this.client.getDownload(json);
-		*/
-
-		// print to console
-		//console.log(JSON.stringify(response, null, "\t"));
+		// check if permitted to download
+		if(details.eligibilityResponse.eligibleToDownload) {
+			// create and fire off download request
+ 			let result = await vmw.getDownload({
+				"locale": "en_US",
+				"downloadGroup": header.dlg.code,
+				"productId": header.product.id,
+				"md5checksum": fileInfo.md5checksum,
+				"tagId": header.dlg.tagId,
+				"uUId": fileInfo.uuid,
+				"dlgType": header.dlg.type.replace(/&amp;/g, '&'), // convert &amp to &
+				"productFamily": header.product.name,
+				"releaseDate": fileInfo.releaseDate,
+				"dlgVersion": fileInfo.version,
+				"isBetaFlow": false
+			});
+			console.log(JSON.stringify(result, null, "\t"));
+		} else {
+			throw new Error('Not permitted to download this file, check account entitlement');
+		}
 	} catch(error) {
 		console.log(error.message);
 	}

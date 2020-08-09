@@ -19,7 +19,8 @@ const password = params.password;
 			category: 'networking_security',
 			product: 'vmware_nsx_t_data_center',
 			version: '3_x',
-			dlgType: 'PRODUCT_BINARY'
+			//dlgType: 'PRODUCT_BINARY'
+			dlgType: 'OPEN_SOURCE'
 		});
 
 		// print to console

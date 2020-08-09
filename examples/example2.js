@@ -17,22 +17,21 @@ const password = params.password;
 		// get and display accountInfo
 		let response = await vmw.getProducts();
 
-		// construct a normalised download index from links
-		let result = [];
-		const links = response.productCategoryList[0].productList;
-		links.forEach((item) => {
+		// construct a normalised product index from links
+		let links = response.productCategoryList[0].productList;
+		let result = links.map((item) => {
 			let target = item.actions.filter((link) => {
 				return (link.linkname == 'View Download Components');
 			})[0].target;
 			let values = target.split('/');
-			result.push({
+			return {
 				name: item.name,
 				target: target,
 				category: values[3],
 				product: values[4],
 				version: values[5],
-				dlgType: 'PRODUCT_BINARY'
-			});
+				dlgType: 'PRODUCT_BINARY' // default type
+			};
 		});
 
 		// print to console
