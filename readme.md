@@ -9,14 +9,14 @@ If you're looking for a CLI tool leveraging this SDK, see [`vmw-cli`](https://gi
 - [Install](#install)
 - [Usage](#usage)
 - [API Methods](#api-methods)
- - [login](#login)
- - [accountInfo](#accountinfo)
- - [getProducts](#getproducts)
- - [getProductHeader](#getproductheader)
- - [getRelatedDLGList](#getrelateddlglist)
- - [getDLGHeader](#getdlgheader)
- - [getDLGDetails](#getdlgdetails)
- - [getDownload](#getdownload)
+  - [login](#login)
+  - [accountInfo](#accountinfo)
+  - [getProducts](#getproducts)
+  - [getProductHeader](#getproductheader)
+  - [getRelatedDLGList](#getrelateddlglist)
+  - [getDLGHeader](#getdlgheader)
+  - [getDLGDetails](#getdlgdetails)
+  - [getDownload](#getdownload)
 
 ---
 ### Install
@@ -524,4 +524,8 @@ const vmw = new vmwClient();
 })();
 ```
 
-**Note:** Make a HTTP GET to the `downloadURL` value returned from **.getDownload()** to download the file
+**Note:** Make a HTTP GET to the `downloadURL` value returned from **.getDownload()** to download the file  
+For example using CURL:
+```shell
+curl -o nsx-unified-appliance-3.0.1.1.0.16556500.ova "https://download2.vmware.com/software/NST-T30110/nsx-unified-appliance-3.0.1.1.0.16556500.ova?..."
+```
