@@ -6,9 +6,17 @@ This low-level SDK implements a login workflow and provides a structured wrapper
 If you're looking for a CLI tool leveraging this SDK, see [`vmw-cli`](https://github.com/apnex/vmw-cli) instead.
 
 ## Highlights
-- [Promise API](#api)
-- [Stream API](#streams)
-- [Pagination API](#pagination)
+- [Install](#install)
+- [Usage](#usage)
+- [API Methods](#api-methods)
+ - [login](#login)
+ - [accountInfo](#accountinfo)
+ - [getProducts](#getproducts)
+ - [getProductHeader](#getproductheader)
+ - [getRelatedDLGList](#getrelateddlglist)
+ - [getDLGHeader](#getdlgheader)
+ - [getDLGDetails](#getdlgdetails)
+ - [getDownload](#getdownload)
 
 ---
 ### Install
@@ -59,7 +67,7 @@ const vmw = new vmwClient();
 ### API Methods
 
 ---
-##### .login
+##### login
 Initiates a login session to **my.vmware.com**
 
 Type: `object`
@@ -91,7 +99,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .accountInfo
+##### accountInfo
 Retrieves account information
 
 [`example1.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example1.js): Display current account info
@@ -132,7 +140,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getProducts
+##### getProducts
 Retrieves main product/solution list
 
 [`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example2.js): Get product list and build a product index
@@ -190,7 +198,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getProductHeader
+##### getProductHeader
 Retrieves specific product information
 
 Type: `object`
@@ -247,7 +255,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getRelatedDLGList
+##### getRelatedDLGList
 Retrieves file download groups for selected product
 
 Type: `object`
@@ -317,7 +325,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getDLGHeader
+##### getDLGHeader
 Retrieves file download groups for selected product
 
 Type: `object`
@@ -370,7 +378,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getDLGDetails
+##### getDLGDetails
 Retrieves available files for current download group
 
 Type: `object`
@@ -429,7 +437,7 @@ const vmw = new vmwClient();
 ```
 
 ---
-##### .getDownload
+##### getDownload
 Retrieve authenticated download URL for a specific selected file
 
 Type: `object`
