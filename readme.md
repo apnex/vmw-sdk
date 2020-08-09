@@ -435,8 +435,17 @@ Retrieve authenticated download URL for a specific selected file
 Type: `object`
 ```js
 {
-	downloadGroup: '<string>',
-	productId: <integer>
+	"locale": "en_US",
+	"downloadGroup": '<string>',
+	"productId": <integer>,
+	"md5checksum": '<string>',
+	"tagId": <integer>,
+	"uUId": <uuid>,
+	"dlgType": '<string>',
+	"productFamily": '<string>',
+	"releaseDate": '<string>',
+	"dlgVersion": '<string>',
+	"isBetaFlow": false
 }
 ```
 
