@@ -15,11 +15,9 @@ const password = params.password;
 		});
 
 		// get and display latest [ vmware_nsx_t_data_center ] information
-		let response = await vmw.getRelatedDLGList({
-			category: 'networking_security',
-			product: 'vmware_nsx_t_data_center',
-			version: '3_x',
-			dlgType: 'PRODUCT_BINARY'
+		let response = await vmw.getDLGDetails({
+			downloadGroup: 'NSX-T-30110',
+			productId: 982
 		});
 
 		// print to console

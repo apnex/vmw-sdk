@@ -3,5 +3,6 @@
 **/cfg
 **/node_modules
 **/params.json
+**/package-lock.json
 **/*.iso
 **/*.ova
