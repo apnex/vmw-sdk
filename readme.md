@@ -1,4 +1,4 @@
-## vmw-sdk
+# `vmw-sdk`
 A promises-based Node.JS SDK for programmatic access to **my.vmware.com**
 
 This low-level SDK implements a login workflow and provides a structured wrapper for REST API calls.
