@@ -1,12 +1,9 @@
 {
 	"name": "vmw-sdk",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"description": "Node.js SDK/API interface for my.vmware.com",
 	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/apnex/vmw-sdk.git"
-	},
+	"repository": "apnex/vmw-sdk",
 	"author": "Andrew Obersnel",
 	"engines": {
 		"node": ">=8"
@@ -25,9 +22,5 @@
 	"dependencies": {
 		"got": "*",
 		"tough-cookie": "*"
-	},
-	"bugs": {
-		"url": "https://github.com/apnex/vmw-sdk/issues"
-	},
-	"homepage": "https://github.com/apnex/vmw-sdk#readme"
+	}
 }
