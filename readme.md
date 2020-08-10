@@ -20,10 +20,8 @@ If you're looking for a CLI tool leveraging this SDK, see [`vmw-cli`](https://gi
 
 ---
 ### Install
-**NOTE:** Please ensure you have `git` installed for your system or the `npm install` command will fail.  
-
 ```
-$ npm install apnex/vmw-sdk
+$ npm install vmw-sdk
 ```
 
 ---
@@ -32,7 +30,7 @@ $ npm install apnex/vmw-sdk
 ###### Promise
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -83,7 +81,7 @@ Type: `object`
 [`example0.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example0.js): Create an authenticated `vmw` client
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -107,7 +105,7 @@ Retrieves account information
 [`example1.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example1.js): Display current account info
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -148,7 +146,7 @@ Retrieves main product/solution list
 [`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example2.js): Get product list and build a product index
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -218,7 +216,7 @@ See [`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examp
 [`example3.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example3.js): Display specific product version information
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -279,7 +277,7 @@ See [`example2.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examp
 [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example4.js): Display download groups for current product
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -344,7 +342,7 @@ See [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examp
 [`example5.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example5.js): Display download groups for current product
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -397,7 +395,7 @@ See [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examp
 [`example6.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example6.js): Get available file downloads for given group
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
@@ -465,7 +463,7 @@ See [`example4.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examp
 [`example7.js`](https://raw.githubusercontent.com/apnex/vmw-sdk/master/examples/example7.js): Get authenticated download URL for specific file
 ```js
 // load and create new client instance
-const vmwClient = require('@apnex/vmw-sdk');
+const vmwClient = require('vmw-sdk');
 const vmw = new vmwClient();
 
 // run
