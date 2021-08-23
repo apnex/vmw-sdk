@@ -1,6 +1,6 @@
 {
 	"name": "vmw-sdk",
-	"version": "1.0.16",
+	"version": "1.1.0",
 	"description": "Node.js SDK/API interface for my.vmware.com",
 	"license": "MIT",
 	"repository": "apnex/vmw-sdk",
@@ -21,6 +21,7 @@
 	],
 	"dependencies": {
 		"got": "*",
+		"npm": "^7.21.0",
 		"tough-cookie": "*"
 	}
 }
