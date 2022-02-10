@@ -3,7 +3,7 @@
 	"version": "1.1.0",
 	"description": "Node.js SDK/API interface for my.vmware.com",
 	"license": "MIT",
-	"repository": "apnex/vmw-sdk",
+	"repository": "remkolodder/vmw-sdk",
 	"author": "Andrew Obersnel",
 	"engines": {
 		"node": ">=8"
