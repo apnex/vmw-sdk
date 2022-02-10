@@ -20,7 +20,7 @@
 		"nodejs"
 	],
 	"dependencies": {
-		"got": "*",
+		"got": "=11.8.2",
 		"npm": "^7.21.0",
 		"tough-cookie": "*"
 	}
