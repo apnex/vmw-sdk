@@ -1,18 +1,18 @@
-#!/usr/bin/env node
-'use strict';
-const vmwClient = require('./vmw.sdk');
-const fs = require('fs');
+#!/usr/bin/env node'use strict';
+import vmwClient from './vmw.sdk';
+import fs from 'fs';
 
 // ignore self-signed certificate
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-const params = require('./params.json');
+import params from './params.json';
+
 var username = params.username;
 var password = params.password;
 
 // colours
-const chalk = require('chalk');
+import chalk from 'chalk';
+
 const red = chalk.bold.red;
-const orange = chalk.keyword('orange');
 const green = chalk.green;
 const blue = chalk.blueBright;
 

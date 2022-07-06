@@ -11,6 +11,7 @@
 	"files": [
 		"lib"
 	],
+	"type": "module",
 	"main": "lib/vmw-sdk.js",
 	"keywords": [
 		"myvmw",
@@ -21,7 +22,7 @@
 	],
 	"dependencies": {
 		"got": "*",
-		"npm": "^7.21.0",
+		"npm": "*",
 		"tough-cookie": "*"
 	}
 }

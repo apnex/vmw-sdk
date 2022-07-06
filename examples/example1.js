@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-const vmwClient = require('../lib/vmw-sdk');
+#!/usr/bin/env nodeimport vmwClient from '../lib/vmw-sdk';
 const vmw = new vmwClient();
 
 // params.json
@@ -7,7 +6,8 @@ const vmw = new vmwClient();
         "username": "my.username",
         "password": "my.password"
 }*/
-const params = require('./params.json');
+import params from './params.json';
+
 const username = params.username;
 const password = params.password;
 
